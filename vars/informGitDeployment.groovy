@@ -7,7 +7,7 @@ def call(String owner) {
     def ref = scmVars.GIT_COMMIT
     def splittedURL = scmVars.GIT_URL.split('/')
     def repo = splittedURL.last().split('\\.').first()
-    owner = splittedURL.[-2]
+    owner = splittedURL[-2]
     //def owner = "milovaz"
     //def repo = "node-js-sample"
     def deployURL = "https://api.github.com/repos/${owner}/${repo}/deployments"
