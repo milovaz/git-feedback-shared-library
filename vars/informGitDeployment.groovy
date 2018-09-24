@@ -1,6 +1,7 @@
 #!/usr/bin/env groovy
 
-def call(scmVars) {
+def call(String owner) {
+    def scmVars = checkout scm
     def environment = "Prod"
     def description = "Deploying my branch"
     def ref = scmVars.GIT_COMMIT
