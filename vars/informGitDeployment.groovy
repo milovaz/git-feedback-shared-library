@@ -5,10 +5,13 @@ def call(String owner) {
     def environment = "Prod"
     def description = "Deploying my branch"
     def ref = scmVars.GIT_COMMIT
+    def splittedURL = scmVars.GIT_URL.split('/')
+    def repo = splittedURL.last().split('\\.').first()
+    owner = splittedURL.getAt(-2)
     //def owner = "milovaz"
-    def repo = "node-js-sample"
+    //def repo = "node-js-sample"
     def deployURL = "https://api.github.com/repos/${owner}/${repo}/deployments"
-    def deployBody = '{"ref": "' + ref +'","environment": "' + environment  +'","description": "' + description + '"}'
+    def deployBody = '{"ref": "' + ref +'","environment": "' + environment  +'","description": "' + description + '", "auto_merge": false}'
 
     // Create new Deployment using the GitHub Deployment API
     def response = httpRequest authentication: 'github-user', httpMode: 'POST', requestBody: deployBody, responseHandle: 'STRING', url: deployURL
