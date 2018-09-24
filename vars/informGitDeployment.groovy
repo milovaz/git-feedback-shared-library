@@ -5,7 +5,7 @@ def call(String owner) {
     def environment = "Prod"
     def description = "Deploying my branch"
     def ref = scmVars.GIT_COMMIT
-    def owner = "milovaz"
+    //def owner = "milovaz"
     def repo = "node-js-sample"
     def deployURL = "https://api.github.com/repos/${owner}/${repo}/deployments"
     def deployBody = '{"ref": "' + ref +'","environment": "' + environment  +'","description": "' + description + '"}'
@@ -34,4 +34,6 @@ def call(String owner) {
     if(deployStatusResponse.status != 201) {
       error("Deployment Status API Update Failed: " + deployStatusResponse.status)
     }
+
+    env.GIT_COMMIT = scmVars.GIT_COMMIT
 }
