@@ -2,5 +2,5 @@
 
 def call() {
   def scmVars = checkout scm
-  echo "Hello, ${scmVars.GIT_COMMIT}."
+  env.GIT_COMMIT = scmVars.GIT_COMMIT
 }

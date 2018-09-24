@@ -11,7 +11,7 @@ def call(String owner) {
     //def owner = "milovaz"
     //def repo = "node-js-sample"
     def deployURL = "https://api.github.com/repos/${owner}/${repo}/deployments"
-    def deployBody = '{"ref": "' + ref +'","environment": "' + environment  +'","description": "' + description + '", "auto_merge": false}'
+    def deployBody = '{"ref": "' + ref +'","environment": "' + environment  +'","description": "' + description + '", "auto_merge": false, "required_contexts": ["continuous-integration/jenkins/branch"]}'
 
     // Create new Deployment using the GitHub Deployment API
     def response = httpRequest authentication: 'github-user', httpMode: 'POST', requestBody: deployBody, responseHandle: 'STRING', url: deployURL
