@@ -4,7 +4,7 @@ def call(String owner) {
     def scmVars = checkout scm
     def environment = "Prod"
     def description = "Deploying my branch"
-    def ref = "225ed062406ae2087c433ab973a7938bf7679e45"
+    def ref = scmVars.GIT_COMMIT
     //def owner = "milovaz"
     def repo = "node-js-sample"
     def deployURL = "https://api.github.com/repos/${owner}/${repo}/deployments"
