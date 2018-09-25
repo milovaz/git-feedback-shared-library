@@ -1,13 +1,13 @@
 #!/usr/bin/env groovy
 
-def call(String owner) {
+def call() {
     def scmVars = checkout scm
     def environment = scmVars.GIT_BRANCH == 'master' ? 'production' : 'development'
     def description = "Deploying branch" 
     def ref = scmVars.GIT_COMMIT
     def splittedURL = scmVars.GIT_URL.split('/')
     def repo = splittedURL.last().split('\\.').first()
-    owner = splittedURL[-2]
+    def owner = splittedURL[-2]
     //def owner = "milovaz"
     //def repo = "node-js-sample"
     def deployURL = "https://api.github.com/repos/${owner}/${repo}/deployments"
