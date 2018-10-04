@@ -3,7 +3,6 @@
 def call() {
     def scmVars = checkout([
         $class: 'GitSCM',
-        branches: scm.branches,
         doGenerateSubmoduleConfigurations: false,
         extensions: [[$class: 'SubmoduleOption',
                         disableSubmodules: false,
