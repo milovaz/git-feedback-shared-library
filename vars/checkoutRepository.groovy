@@ -1,7 +1,20 @@
 #!/usr/bin/env groovy
 
 def call() {
-    def scmVars = checkout scm
+    def scmVars = checkout([
+        $class: 'GitSCM',
+        branches: scm.branches,
+        doGenerateSubmoduleConfigurations: false,
+        extensions: [[$class: 'SubmoduleOption',
+                        disableSubmodules: false,
+                        parentCredentials: true,
+                        recursiveSubmodules: true,
+                        reference: '',
+                        trackingSubmodules: false],
+                    [$class: 'CleanBeforeCheckout'], 
+                    [$class: 'CleanCheckout']],
+        userRemoteConfigs: scm.userRemoteConfigs
+    ])
     def environment = scmVars.GIT_BRANCH == 'master' ? 'production' : 'development'
     def description = "Deploying branch" 
     def ref = scmVars.GIT_COMMIT
